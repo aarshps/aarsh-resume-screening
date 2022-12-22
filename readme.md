@@ -10,5 +10,8 @@
 2. https://phoenixnap.com/kb/install-flask
 3. https://testdriven.io/courses/learn-flask/intro/
 
+### Server Up Online
+1. https://ngrok.com/
+
 ### Resume-screening Reference
 1. https://towardsdatascience.com/resume-screening-with-python-1dea360be49b
