@@ -10,6 +10,8 @@
 2. https://phoenixnap.com/kb/install-flask
 3. https://testdriven.io/courses/learn-flask/intro/
 4. https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3
+5. https://www.digitalocean.com/community/tutorials
+how-to-create-your-first-web-application-using-flask-and-python-3
 
 ### Resume-screening Reference
 1. https://towardsdatascience.com/resume-screening-with-python-1dea360be49b
