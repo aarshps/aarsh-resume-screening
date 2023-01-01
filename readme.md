@@ -1,5 +1,4 @@
 ## Resume-screening URLs
----------------------
 
 ### Repo Reference
 1. https://github.com/aarshps/photo-gallery-python-flask
