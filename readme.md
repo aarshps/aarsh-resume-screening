@@ -18,6 +18,8 @@
 2. https://pemagrg.medium.com/build-a-web-app-using-pythons-flask-for-beginners-f28315256893
 #### 30-Jan-2023
 1. https://www.digitalocean.com/community/tutorials/how-to-use-web-forms-in-a-flask-application
+#### 14-Feb-2023
+1. https://www.geeksforgeeks.org/how-to-upload-file-in-python-flask/
 
 ### Resume-screening Reference
 1. https://towardsdatascience.com/resume-screening-with-python-1dea360be49b
