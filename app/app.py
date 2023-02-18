@@ -9,6 +9,10 @@ messages = [{'title': 'Message One',
             {'title': 'Message Two',
              'content': 'Message Two Content'}]
     
+# url_for{"index"} ---> /
+# url_for{"create"} ---> /create/
+# url_for{"main"} ---> /file
+# url_for{"success"} ---> /success
 
 @app.route('/')
 def index():

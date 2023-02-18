@@ -29,9 +29,15 @@
         <a href="#">About</a>
     </nav>
     <hr>
+    <button type="button" onclick="window.location.href='{{ url_for( 'index') }}';">
+        Home</button>
+    <button type="button" onclick="window.location.href='{{ url_for( 'create') }}';">
+        About You</button>
+    <button type="button" onclick="window.location.href='{{ url_for( 'main') }}';">
+        Upload Resume</button>
     <div class="content">
         {% for message in get_flashed_messages() %}
-            <div class="alert">{{ message }}</div>
+            <div class="alert">{{ Message }}</div>
         {% endfor %}
         {% block content %} {% endblock %}
     </div>
