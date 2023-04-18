@@ -37,7 +37,7 @@
         Upload Resume</button>
     <div class="content">
         {% for message in get_flashed_messages() %}
-            <div class="alert">{{ Message }}</div>
+            <div class="alert">{{ message }}</div>
         {% endfor %}
         {% block content %} {% endblock %}
     </div>

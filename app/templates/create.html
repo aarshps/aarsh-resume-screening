@@ -1,12 +1,12 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <h1>{% block title %} Add a New Message {% endblock %}</h1>
+<h1 style="color: #d64161";> {% block title %} ABOUT YOU {% endblock %} </h1>
     <form method="post">
         <label for="title">Title</label>
         <br>
         <input type="text" name="title"
-               placeholder="Message title"
+               placeholder="Name"
                value="{{ request.form['title'] }}"></input>
         <br>
 
