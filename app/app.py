@@ -1,40 +1,6 @@
-'''
-app.config['SECRET_KEY'] = 'your secret key'
-messages = []
-    
-# url_for{"index"} ---> /
-# url_for{"create"} ---> /create/
-# url_for{"main"} ---> /file
-# url_for{"success"} ---> /success
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-@app.route('/')
-def index():
-    return render_template('base.html', messages=messages)
-
-@app.route('/create/', methods=('GET', 'POST'))
-def create():
-    if request.method == 'POST':
-        title = request.form['title']
-        content = request.form['content']
-        if not title:
-            flash('Title is required!')
-        elif not content:
-            flash('Content is required!')
-        else:
-            messages.append({'title': title, 'content': content})
-            return redirect(url_for('index'))
-
-    return render_template('create.html')'''
-
-
 import os
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
 from werkzeug.utils import secure_filename
-from flask import *
 import PyPDF2
 import re
 import pandas as pd
@@ -53,10 +19,8 @@ app.add_url_rule(
 )
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 app.config['SECRET_KEY'] = 'super secret key'
-messages = [{'title': 'Message One',
-             'content': 'Message One Content'},
-            {'title': 'Message Two',
-             'content': 'Message Two Content'}]
+messages = [{'title': '',
+             'content': ''}]
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -81,7 +45,7 @@ def create():
 
     return render_template('create.html')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/file', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -116,6 +80,7 @@ def screening(name):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
 
             pdfFileObj = open('uploads/{}'.format(filename), 'rb')
             pdfReader = PyPDF2.PdfReader(pdfFileObj)
@@ -227,13 +192,13 @@ def screening(name):
             # data_all_list_df = pd.DataFrame.from_dict(data_all_list, orient='index', dtype=object).transpose()
 
             summary = \
-            pd.DataFrame(scores, index=bidang.keys(), columns=['score']).sort_values(by='score', ascending=False).loc[
+                pd.DataFrame(scores, index=bidang.keys(), columns=['score']).sort_values(by='score', ascending=False).loc[
                 lambda df: df['score'] > 0]
 
             fig, ax = plt.subplots(figsize=(10, 10))
             ax.pie(summary['score'], labels=summary.index, autopct='%1.1f%%', startangle=90, shadow=True)
             ax.set_aspect('equal')
-            ax.set_title("Skor kemampuan pada setiap bidang")
+            ax.set_title("Scores")
             buf = BytesIO()
             ax.figure.savefig(buf, format="png")
             data = base64.b64encode(buf.getbuffer()).decode("ascii")
@@ -352,7 +317,7 @@ def screening(name):
         fig, ax = plt.subplots(figsize=(10, 10))
         ax.pie(summary['score'], labels=summary.index, autopct='%1.1f%%', startangle=90, shadow=True)
         ax.set_aspect('equal')
-        ax.set_title("Skor kemampuan pada setiap bidang")
+        ax.set_title("Scores")
         buf = BytesIO()
         ax.figure.savefig(buf, format="png")
         data = base64.b64encode(buf.getbuffer()).decode("ascii")

@@ -135,3 +135,26 @@ plt.show()
 
 # Save pie chart as a .png file
 #pie.savefig('resume_screening_results.png')
+
+
+
+
+    <section class="portfolio-block skills" id="hasil" style="padding: 50px !important;">
+        <div class="container">
+            <div class="heading" style="margin-bottom: 0 !important;">
+                <h2>Hasil Screening Skills</h2>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card special-skill-item border-0">
+                        <div class="card-body">
+                            <img src=data:image/png;base64,{{ data }} style="width: 70%; height: 70%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+

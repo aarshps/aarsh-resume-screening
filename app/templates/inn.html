@@ -1,6 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
 
+
+{% extends 'index.html' %}
+
+{% block content %}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -23,14 +25,14 @@
     <section class="portfolio-block block-intro" style="padding: 50px !important;">
         <div class="container">
             <div class="about-me">
-                <p>Resume screening application by calculating scores</p>
+                <p>Screening Resume.</p>
             </div>
         </div>
     </section>
     <section class="portfolio-block call-to-action border-bottom" style="padding: 50px !important;">
         <div class="container">
             <div class="d-flex justify-content-center align-items-center content">
-                <h3>Tertarik?<br>Upload PDF</h3>
+                <h3>Upload PDF</h3>
                 <div>
                     <form method=post enctype=multipart/form-data>
                         <div class="custom-file" style="padding-bottom: 50px">
@@ -51,7 +53,24 @@
             </div>
         </div>
     </section>
+    <section class="portfolio-block skills" id="hasil" style="padding: 50px !important;">
+        <div class="container">
+            <div class="heading" style="margin-bottom: 0 !important;">
+                <h2>Screening Skills</h2>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card special-skill-item border-0">
+                        <div class="card-body">
+                            <img src=data:image/png;base64,{{ data }} style="width: 70%; height: 70%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 </body>
 
 </html>
+{% endblock %}
