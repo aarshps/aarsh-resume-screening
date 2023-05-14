@@ -24,6 +24,13 @@
 ### Resume-screening Reference
 1. https://towardsdatascience.com/resume-screening-with-python-1dea360be49b
 
+### Mail-sending Reference
+#### 14-May-2023
+1. https://youtu.be/ejLGwHiyqGU
+2. https://www.w3schools.com/html/html_form_attributes_form.asp
+#### 15-May-2023
+1. https://youtu.be/1oOefRD8jek
+
 ### Keywords
 - Git
 - Source Control
@@ -37,3 +44,4 @@
 - Github Pages
 - Controller, Service, MVC in Flask
 - md, html
+- base64
