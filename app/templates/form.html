@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <head>
+        <title>form</title>
+    </head>
+    <body>
+        <form action="{{url_for('send_message')}}" method="POST">
+            <input type="email" name="email" placeholder="Email" required id="">
+            <input type="text" name="subject" placeholder="Subject" required id="">
+            <textarea name="email" id="" cols="30" placeholder="Message Body" required rows="10"></textarea>
+            <input type="submit" value="Send Message">
+        </form>
+    </body>
+{% endblock %}

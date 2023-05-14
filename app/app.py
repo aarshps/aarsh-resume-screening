@@ -7,12 +7,24 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
+from flask_mail import Mail, Message
 
 path = os.getcwd()
 UPLOAD_FOLDER = os.path.join(path, 'uploads')
 ALLOWED_EXTENSIONS = {'pdf'}
 
 app = Flask(__name__)
+
+   
+# configuration of mail
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'aathiraprcse2019@thejusengg.com'
+app.config['MAIL_PASSWORD'] = 'thejusnewacc'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.add_url_rule(
     "/uploads/<name>", endpoint="download_file", build_only=True
@@ -323,6 +335,25 @@ def screening(name):
         data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
     return render_template('inn.html', data=data)
+
+@app.route('/mail')
+def mail():
+    return render_template("form.html")
+
+@app.route('/send_message', methods=['POST','GET'])
+def send_message():
+    if request.method == "POST":
+        email = request.form['email']
+        subject = request.form['subject']
+        msg = request.form['message']
+
+        message = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=[email])
+        message.body = msg
+        mail.send(message)
+        success = "Message sent"
+        return render_template("result.html", success=success)
+    
+    
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=False)
