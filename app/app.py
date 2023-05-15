@@ -10,6 +10,7 @@ from io import BytesIO
 from flask_mail import Mail, Message
 
 path = os.getcwd()
+
 UPLOAD_FOLDER = os.path.join(path, 'uploads')
 ALLOWED_EXTENSIONS = {'pdf'}
 
@@ -20,8 +21,7 @@ app = Flask(__name__)
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'aathiraprcse2019@thejusengg.com'
-app.config['MAIL_PASSWORD'] = 'thejusnewacc'
-app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_PASSWORD'] = 'tototooto'
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
@@ -341,7 +341,7 @@ def mail():
     return render_template("form.html")
 
 @app.route('/send_message', methods=['POST','GET'])
-def send_message():
+def send_mail():
     if request.method == "POST":
         email = request.form['email']
         subject = request.form['subject']
@@ -354,6 +354,6 @@ def send_message():
         return render_template("result.html", success=success)
     
     
-
+s
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=False)
