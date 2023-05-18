@@ -45,3 +45,35 @@
 - Controller, Service, MVC in Flask
 - md, html
 - base64
+
+### Installation
+### STEP 1 - Install Visual Studio Code
+https://www.geeksforgeeks.org/how-to-install-visual-studio-code-on-windows/
+
+### STEP 2 - Install Python
+Install Python from python.org. You can typically use the Download Python button that appears first on the page to download the latest version.
+
+### STEP 3 - Verify the Python installation
+To verify that you've installed Python successfully on your machine, run the following command
+Open a command prompt and run the following command:
+
+py -3 --version
+
+If the installation was successful, the output window should show the version of Python that you installed.
+
+### STEP 4 - Install Flask
+https://phoenixnap.com/kb/install-flask
+
+### STEP 6 - Code
+Copy the code and download required libraries
+pip install < required library >
+
+### STEP 7 - Run the code
+First activate the environment, to actiavte the environment:
+C:\users\Documents\Source\resume-screener\<environment name>\Scripts\activate
+
+After the environment is activated get the path back to app.py
+C:\users\Documents\Source\resume-screener\resume-screener\app
+
+Then run the following command to get the output:
+flask run
