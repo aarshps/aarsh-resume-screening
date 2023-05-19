@@ -53,6 +53,9 @@ https://www.geeksforgeeks.org/how-to-install-visual-studio-code-on-windows/
 ### STEP 2 - Install Python
 Install Python from python.org. You can typically use the Download Python button that appears first on the page to download the latest version.
 
+While installing python make sure that you install pip alone with it:
+https://youtu.be/dYfKJMPNMDw
+
 ### STEP 3 - Verify the Python installation
 To verify that you've installed Python successfully on your machine, run the following command
 Open a command prompt and run the following command:
@@ -68,6 +71,9 @@ https://phoenixnap.com/kb/install-flask
 Copy the code and download required libraries
 pip install < required library >
 
+if pip doesn't work, then upgrade pip using following command:
+py -m pip install --upgrade pip
+
 ### STEP 7 - Run the code
 First activate the environment, to actiavte the environment:
 C:\users\Documents\Source\resume-screener\<environment name>\Scripts\activate
@@ -76,4 +82,4 @@ After the environment is activated get the path back to app.py
 C:\users\Documents\Source\resume-screener\resume-screener\app
 
 Then run the following command to get the output:
-flask run
+flask run or python -m flask run
