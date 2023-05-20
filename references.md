@@ -1,0 +1,27 @@
+# References
+
+- Repo Reference
+    - 31-Dec-2022
+        - https://github.com/aarshps/photo-gallery-python-flask
+- Flask Learn Reference
+    - 31-Dec-2022
+        - https://flask.palletsprojects.com/en/2.2.x/quickstart/
+        - https://phoenixnap.com/kb/install-flask
+        - https://testdriven.io/courses/learn-flask/intro/
+        - https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3
+    - 1-Jan-2023
+        - https://www.digitalocean.com/community/tutorials/how-to-create-your-first-web-application-using-flask-and-python-3
+        - https://pemagrg.medium.com/build-a-web-app-using-pythons-flask-for-beginners-f28315256893
+    - 30-Jan-2023
+        - https://www.digitalocean.com/community/tutorials/how-to-use-web-forms-in-a-flask-application
+    - 14-Feb-2023
+        - https://www.geeksforgeeks.org/how-to-upload-file-in-python-flask/
+- Resume-screening Reference
+    - 31-Dec-2022
+        - https://towardsdatascience.com/resume-screening-with-python-1dea360be49b
+- Mail-sending Reference
+    - 14-May-2023
+        - https://youtu.be/ejLGwHiyqGU
+        - https://www.w3schools.com/html/html_form_attributes_form.asp
+    - 15-May-2023
+        - https://youtu.be/1oOefRD8jek
