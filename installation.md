@@ -3,9 +3,10 @@
 - Install Visual Studio Code
     - https://www.geeksforgeeks.org/how-to-install-visual-studio-code-on-windows/
 - Install Python
-    - Install Python from python.org. You can typically use the Download Python button that appears first on the page to download the latest version.
-    - While installing python make sure that you install pip alone with it:
-    - https://youtu.be/dYfKJMPNMDw
+    - Install Python from python.org
+    - You can typically use the Download Python button that appears first on the page to download the latest version
+    - While installing python make sure that you install pip along with it
+        - https://youtu.be/dYfKJMPNMDw
 - Verify the Python installation
     - To verify that you've installed Python successfully on your machine, run the following command
     - Open a command prompt and run the following command:
