@@ -17,14 +17,14 @@
 - Code
     - Copy the code and download required libraries
         - ```pip install < required library >```
-     Libraries:
-    - PyPDF2
-    - pandas
-    - matplotlib.pyplot
-    - re
-    - base64
-    - flask_mail
-    - werkzeug.utils (A bug related to the current version 1.0.0 of workzeug. It's merged but not yet published in pypi. The workaround know until now is to downgrade from        werkzeug=1.0.0 to werkzeug==0.16.0)
+  Libraries:
+    1. PyPDF2
+    2. pandas
+    3. matplotlib.pyplot
+    4. re
+    5. base64
+    6. flask_mail
+    7. werkzeug.utils (A bug related to the current version 1.0.0 of workzeug. It's merged but not yet published in pypi. The workaround know until now is to downgrade from        werkzeug=1.0.0 to werkzeug==0.16.0)
     So for do that you just need run the command:
         - ```pip install -U Werkzeug==0.16.0```
     - If pip doesn't work, then upgrade pip using following command:
