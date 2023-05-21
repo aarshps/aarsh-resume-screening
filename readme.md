@@ -62,14 +62,30 @@ Open a command prompt and run the following command:
 
 py -3 --version
 
+if the above code doesn't work then open Windows Powershell, and enter the following:
+python --version
+
 If the installation was successful, the output window should show the version of Python that you installed.
 
 ### STEP 4 - Install Flask
 https://phoenixnap.com/kb/install-flask
 
 ### STEP 6 - Code
-Copy the code and download required libraries
+Clone the code and download required libraries
 pip install < required library >
+
+    Libraries:
+    1. PyPDF2
+    2. pandas
+    3. matplotlib.pyplot
+    4. re
+    5. base64
+    6. flask_mail
+    7. werkzeug.utils (A bug related to the current version 1.0.0 of workzeug. It's merged but not yet published in pypi. The workaround know until now is to downgrade from werkzeug=1.0.0 to werkzeug==0.16.0
+
+    So for do that you just need run the command:
+
+    pip install -U Werkzeug==0.16.0)
 
 if pip doesn't work, then upgrade pip using following command:
 py -m pip install --upgrade pip
