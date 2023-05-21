@@ -17,7 +17,7 @@
 - Code
     - Copy the code and download required libraries
         - ```pip install < required library >```
-        Libraries:
+     Libraries:
     - PyPDF2
     - pandas
     - matplotlib.pyplot
