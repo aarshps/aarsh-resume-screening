@@ -16,7 +16,6 @@ ALLOWED_EXTENSIONS = {'pdf'}
 
 app = Flask(__name__)
 
-   
 # configuration of mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
