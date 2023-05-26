@@ -26,3 +26,6 @@
         - ```C:\users\Documents\Source\resume-screener\resume-screener\app```
     - Then run the following command to get the output:
         - ```flask run or python -m flask run```
+- Deactivation of environment
+    -After the execution of the program you can quit the activated environment with the following command:
+        - ```deactivate``` 
