@@ -15,12 +15,14 @@ UPLOAD_FOLDER = os.path.join(path, 'uploads')
 ALLOWED_EXTENSIONS = {'pdf'}
 
 app = Flask(__name__)
+mail = Mail(app)
 
 # configuration of mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'aathiraprcse2019@thejusengg.com'
-app.config['MAIL_PASSWORD'] = 'tototooto'
+app.config['MAIL_PASSWORD'] = 'thejusnewacc'
+app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
@@ -336,7 +338,7 @@ def screening(name):
     return render_template('inn.html', data=data)
 
 @app.route('/mail')
-def mail():
+def mail_home():
     return render_template("form.html")
 
 @app.route('/send_message', methods=['POST','GET'])
