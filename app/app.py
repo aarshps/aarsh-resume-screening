@@ -351,8 +351,6 @@ def send_mail():
         mail.send(message)
         success = "Message sent"
         return render_template("result.html", success=success)
-    
-    
-s
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=False)
