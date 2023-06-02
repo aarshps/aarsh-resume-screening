@@ -15,13 +15,14 @@ UPLOAD_FOLDER = os.path.join(path, 'uploads')
 ALLOWED_EXTENSIONS = {'pdf'}
 
 app = Flask(__name__)
+mail = Mail(app)
 
-   
 # configuration of mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'aathiraprcse2019@thejusengg.com'
-app.config['MAIL_PASSWORD'] = 'tototooto'
+app.config['MAIL_PASSWORD'] = 'thejusnewacc'
+app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
@@ -39,6 +40,40 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
+#def home():
+#    return render_template('base.html', messages=messages)
+def hello_world():
+    return render_template("login.html")
+database={'aathira':'123','abhirami':'ari','amal':'amallu','jewelna':'jo'}
+
+#@app.route('/create/', methods=('GET', 'POST'))
+#def create():
+#    if request.method == 'POST':
+#        title = request.form['title']
+#        content = request.form['content']
+#        if not title:
+#            flash('Title is required!')
+#        elif not content:
+#            flash('Content is required!')
+#        else:
+#            messages.append({'title': title, 'content': content})
+#            return redirect(url_for('index'))
+
+#    return render_template('create.html')
+
+@app.route('/form_login',methods=['POST','GET'])
+def login():
+    name1=request.form['username']
+    pwd=request.form['password']
+    if name1 not in database:
+	    return render_template('login.html',info='Invalid User')
+    else:
+        if database[name1]!=pwd:
+            return render_template('login.html',info='Invalid Password')
+        else:
+	         return render_template('index.html',name=name1)
+        
+@app.route('/index')     
 def index():
     return render_template('base.html', messages=messages)
 
@@ -337,7 +372,7 @@ def screening(name):
     return render_template('inn.html', data=data)
 
 @app.route('/mail')
-def mail():
+def mail_home():
     return render_template("form.html")
 
 @app.route('/send_message', methods=['POST','GET'])
@@ -345,15 +380,12 @@ def send_mail():
     if request.method == "POST":
         email = request.form['email']
         subject = request.form['subject']
-        msg = request.form['message']
 
-        message = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=[email])
-        message.body = msg
-        mail.send(message)
+        msg = Message(subject , sender="aathiraprcse2019@thejusengg.com", recipients=[email])
+        msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
+        mail.send(msg)
         success = "Message sent"
         return render_template("result.html", success=success)
-    
-    
-s
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=False)

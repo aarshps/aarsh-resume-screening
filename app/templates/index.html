@@ -22,20 +22,17 @@
 
     </style>
 </head>
-<body>
-    <nav>
-        <a href="{{ url_for('index') }}">FlaskApp</a>
-        <a href="{{ url_for('create') }}">Create</a>
-        <a href="#">About</a>
-    </nav>
-    <hr>
+<body  bgcolor="teal">
+    <br>
+    <h1 align="center">Welcome {{name}} !</h1>
+    <br>
     <button type="button" onclick="window.location.href='{{ url_for( 'index') }}';">
         Home</button>
     <button type="button" onclick="window.location.href='{{ url_for( 'create') }}';">
         About You</button>
     <button type="button" onclick="window.location.href='{{ url_for( 'upload_file') }}';">
         Upload Resume</button>
-    <button type="button" onclick="window.location.href='{{ url_for( 'mail') }}';">
+    <button type="button" onclick="window.location.href='{{ url_for( 'mail_home') }}';">
         Send Mail</button>
     <div class="content">
         {% for message in get_flashed_messages() %}
