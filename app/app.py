@@ -40,26 +40,9 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
-#def home():
-#    return render_template('base.html', messages=messages)
 def hello_world():
     return render_template("login.html")
 database={'aathira':'123','abhirami':'ari','amal':'amallu','jewelna':'jo'}
-
-#@app.route('/create/', methods=('GET', 'POST'))
-#def create():
-#    if request.method == 'POST':
-#        title = request.form['title']
-#        content = request.form['content']
-#        if not title:
-#            flash('Title is required!')
-#        elif not content:
-#            flash('Content is required!')
-#        else:
-#            messages.append({'title': title, 'content': content})
-#            return redirect(url_for('index'))
-
-#    return render_template('create.html')
 
 @app.route('/form_login',methods=['POST','GET'])
 def login():
