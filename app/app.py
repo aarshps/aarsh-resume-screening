@@ -40,6 +40,23 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
+def hello_world():
+    return render_template("login.html")
+database={'aathira':'123','abhirami':'ari','amal':'amallu','jewelna':'jo'}
+
+@app.route('/form_login',methods=['POST','GET'])
+def login():
+    name1=request.form['username']
+    pwd=request.form['password']
+    if name1 not in database:
+	    return render_template('login.html',info='Invalid User')
+    else:
+        if database[name1]!=pwd:
+            return render_template('login.html',info='Invalid Password')
+        else:
+	         return render_template('index.html',name=name1)
+        
+@app.route('/index')     
 def index():
     return render_template('base.html', messages=messages)
 
@@ -346,11 +363,10 @@ def send_mail():
     if request.method == "POST":
         email = request.form['email']
         subject = request.form['subject']
-        msg = request.form['message']
 
-        message = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=[email])
-        message.body = msg
-        mail.send(message)
+        msg = Message(subject , sender="aathiraprcse2019@thejusengg.com", recipients=[email])
+        msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
+        mail.send(msg)
         success = "Message sent"
         return render_template("result.html", success=success)
 
