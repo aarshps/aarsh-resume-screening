@@ -358,17 +358,28 @@ def screening(name):
 def mail_home():
     return render_template("form.html")
 
+
 @app.route('/send_message', methods=['POST','GET'])
 def send_mail():
     if request.method == "POST":
         email = request.form['email']
         subject = request.form['subject']
 
-        msg = Message(subject , sender="aathiraprcse2019@thejusengg.com", recipients=[email])
-        msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
+    body = 'Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26'
+    sender = 'aathiraprcse2019@thejusengg.com'
+    recipients = ['aathiraprcse2019@thejusengg.com', 'aadhirapr@gmail.com']  # Replace with recipient email addresses
+
+    # Retrieve the score from somewhere, such as a database or form submission
+    score = screening(name) # Replace with your own method to retrieve the score
+
+    # Check if the score is more than 80%
+    if score['data_list'] > 10:
+        msg = Message(subject=subject, body=body, sender=sender, recipients=recipients)
         mail.send(msg)
         success = "Message sent"
         return render_template("result.html", success=success)
+    else:
+        return 'Score is not more than 10%. Email not sent.'
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=False)
