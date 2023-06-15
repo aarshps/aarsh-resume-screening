@@ -358,7 +358,7 @@ def screening(name):
         ax.figure.savefig(buf, format="png")
         data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
-        if summary['score']['Data Science'] > 0:
+        if summary['score']['Data Science'] > 1:
             subject="Congratulations!"
             msg = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=["aadhirapr@gmail.com"])
             msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
