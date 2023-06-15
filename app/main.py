@@ -135,3 +135,35 @@ plt.show()
 
 
 
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+# Assume you have a function to get the pie chart data
+def get_pie_chart_data():
+    # Retrieve the data for the pie chart
+    data = {
+        'Slice 1': 15,
+        'Slice 2': 8,
+        'Slice 3': 12,
+        'Slice 4': 5,
+        # Add more slices as needed
+    }
+    return data
+
+@app.route('/')
+def home():
+    # Get the pie chart data
+    pie_chart_data = get_pie_chart_data()
+
+    # Check if the score of a slice is greater than 10
+    desired_slice = 'Slice 1'
+    condition = pie_chart_data.get(desired_slice, 0) > 10
+
+    if condition:
+        return f"The score of {desired_slice} is greater than 10"
+    else:
+        return f"The score of {desired_slice} is not greater than 10"
+
+if __name__ == '__main__':
+    app.run()
