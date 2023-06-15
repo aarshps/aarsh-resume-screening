@@ -21,7 +21,7 @@ mail = Mail(app)
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'aathiraprcse2019@thejusengg.com'
-app.config['MAIL_PASSWORD'] = ''
+app.config['MAIL_PASSWORD'] = 'thejusnewacc'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -233,6 +233,12 @@ def screening(name):
             ax.figure.savefig(buf, format="png")
             data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
+        if summary['score']['Data Science'] > 0:
+            subject="Congratulations!"
+            msg = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=["aadhirapr@gmail.com"])
+            msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
+            mail.send(msg)
+
     else:
         pdfFileObj = open('uploads/{}'.format(name), 'rb')
         pdfReader = PyPDF2.PdfReader(pdfFileObj)
@@ -352,6 +358,13 @@ def screening(name):
         ax.figure.savefig(buf, format="png")
         data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
+        if summary['score']['Data Science'] > 1:
+            subject="Congratulations!"
+            msg = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=["aadhirapr@gmail.com"])
+            msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
+            mail.send(msg)
+        
+
     return render_template('inn.html', data=data)
 
 @app.route('/mail')
@@ -365,21 +378,11 @@ def send_mail():
         email = request.form['email']
         subject = request.form['subject']
 
-    body = 'Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26'
-    sender = 'aathiraprcse2019@thejusengg.com'
-    recipients = ['aathiraprcse2019@thejusengg.com', 'aadhirapr@gmail.com']  # Replace with recipient email addresses
-
-    # Retrieve the score from somewhere, such as a database or form submission
-    score = screening(name) # Replace with your own method to retrieve the score
-
-    # Check if the score is more than 80%
-    if score['data_list'] > 10:
-        msg = Message(subject=subject, body=body, sender=sender, recipients=recipients)
+        msg = Message(subject , sender="aathiraprcse2019@thejusengg.com", recipients=[email])
+        msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
         mail.send(msg)
         success = "Message sent"
         return render_template("result.html", success=success)
-    else:
-        return 'Score is not more than 10%. Email not sent.'
-
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=False)
