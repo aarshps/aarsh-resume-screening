@@ -39,6 +39,16 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def extract_email(email_content):
+    pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
+    email_pattern_compile = re.compile(pattern)
+    email_extracted_result = email_pattern_compile.search(email_content)
+    email_extracted = email_extracted_result.group()
+
+    print(email_extracted_result)
+
+    return email_extracted
+
 @app.route('/')
 def hello_world():
     return render_template("login.html")
@@ -259,6 +269,9 @@ def screening(name):
             resumeText = re.sub(r'[^\x00-\x7f]', r' ', resumeText)
             resumeText = re.sub('\s+', ' ', resumeText)  # remove extra whitespace
             return resumeText.lower()
+        
+        extracted_email = extract_email(text)
+        print(extracted_email)
 
         text = cleanResume(text)
 
@@ -359,7 +372,7 @@ def screening(name):
 
         if summary['score']['Project Management'] > 1:
             subject="Congratulations!"
-            msg = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=["aadhirapr@gmail.com"])
+            msg = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=[extracted_email])
             msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
             mail.send(msg)
         
