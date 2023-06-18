@@ -52,7 +52,7 @@ def login():
 	    return render_template('login.html',info='Invalid User')
     else:
         if database[name1]!=pwd:
-            return render_template('login.html',info='Invalid Password')
+            return render_template('login.html',info='Invalid Password', username=name1)
         else:
 	         return render_template('index.html',name=name1)
         
