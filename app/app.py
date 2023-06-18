@@ -221,8 +221,7 @@ def screening(name):
                              'Data Science': data_list, 'DevOps': devops_list}
             # data_all_list_df = pd.DataFrame.from_dict(data_all_list, orient='index', dtype=object).transpose()
 
-            summary = \
-                pd.DataFrame(scores, index=bidang.keys(), columns=['score']).sort_values(by='score', ascending=False).loc[
+            summary = pd.DataFrame(scores, index=bidang.keys(), columns=['score']).sort_values(by='score', ascending=False).loc[
                 lambda df: df['score'] > 0]
 
             fig, ax = plt.subplots(figsize=(10, 10))
@@ -233,7 +232,7 @@ def screening(name):
             ax.figure.savefig(buf, format="png")
             data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
-        if summary['score']['Data Science'] > 0:
+        if summary['score']['Project Management'] > 1:
             subject="Congratulations!"
             msg = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=["aadhirapr@gmail.com"])
             msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
@@ -358,7 +357,7 @@ def screening(name):
         ax.figure.savefig(buf, format="png")
         data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
-        if summary['score']['Data Science'] > 1:
+        if summary['score']['Project Management'] > 1:
             subject="Congratulations!"
             msg = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=["aadhirapr@gmail.com"])
             msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
