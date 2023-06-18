@@ -32,8 +32,6 @@
         About You</button>
     <button type="button" onclick="window.location.href='{{ url_for( 'upload_file') }}';">
         Upload Resume</button>
-    <button type="button" onclick="window.location.href='{{ url_for( 'mail_home') }}';">
-        Send Mail</button>
     <div class="content">
         {% for message in get_flashed_messages() %}
             <div class="alert">{{ message }}</div>

@@ -35,6 +35,8 @@ app.config['SECRET_KEY'] = 'super secret key'
 messages = [{'title': '',
              'content': ''}]
 
+database={'aathira':'123','abhirami':'ari','amal':'amallu','jewelna':'jo'}
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -45,14 +47,11 @@ def extract_email(email_content):
     email_extracted_result = email_pattern_compile.search(email_content)
     email_extracted = email_extracted_result.group()
 
-    print(email_extracted_result)
-
     return email_extracted
 
 @app.route('/')
 def hello_world():
     return render_template("login.html")
-database={'aathira':'123','abhirami':'ari','amal':'amallu','jewelna':'jo'}
 
 @app.route('/form_login',methods=['POST','GET'])
 def login():
@@ -379,22 +378,5 @@ def screening(name):
 
     return render_template('inn.html', data=data)
 
-@app.route('/mail')
-def mail_home():
-    return render_template("form.html")
-
-
-@app.route('/send_message', methods=['POST','GET'])
-def send_mail():
-    if request.method == "POST":
-        email = request.form['email']
-        subject = request.form['subject']
-
-        msg = Message(subject , sender="aathiraprcse2019@thejusengg.com", recipients=[email])
-        msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
-        mail.send(msg)
-        success = "Message sent"
-        return render_template("result.html", success=success)
-    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=False)
