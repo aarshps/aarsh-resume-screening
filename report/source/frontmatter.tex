@@ -1,0 +1,44 @@
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[L]{{\scriptsize \vtitle}}
+\fancyhead[R]{\footnotesize Final year project report}
+%\fancyfoot[C]{\bfseries \thepage} 
+\fancyfoot[L]{{\footnotesize Department of  \vdept\ }}
+\fancyfoot[R]{\footnotesize Thejus Engg college, Vellarakkad}
+\fancyfoot[C]{\footnotesize \bf \thepage}%
+\SetBgContents{
+\begin{tikzpicture}[overlay,remember picture]
+\draw [black,line width=3pt]
+    ($ (current page.north west) + ( 3cm,-1.97cm) $)
+    rectangle
+    ($ (current page.south east) + (-1.5cm,1.85cm) $);
+\draw [black,line width=1pt]
+    ($ (current page.north west) + (3.15cm,-2.12cm) $)
+    rectangle
+    ($ (current page.south east) + (-1.65cm,2cm) $); 
+\end{tikzpicture}
+}
+}%
+%
+%
+\pagestyle{empty}
+%
+\input{titlepage}
+%
+\clearpage
+\pagenumbering{roman}
+%
+
+
+%\addcontentsline{toc}{chapter}{\quad Certificate}
+\input{certificate}
+%
+\clearpage
+\pagestyle{plain}
+%
+
+\addcontentsline{toc}{chapter}{\quad ACKNOWLEDGEMENT}
+\input{acknowledgment}
+%
+\clearpage
+%

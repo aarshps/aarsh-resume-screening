@@ -1,8 +1,6 @@
 
 
-{% extends 'index.html' %}
-
-{% block content %}
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -36,7 +34,13 @@
                             <input type="file" class="custom-file-input" name="file" id="customFile">
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
-                        <input type=submit class="btn btn-primary" value=Upload>
+                        <input type=submit style="background-color: #000000;
+                        color: #ffffff;
+                        font-weight: bold;
+                        padding: 10px;
+                        border: none;
+                        cursor: pointer;
+                        border-radius: 5px;" class="btn btn-primary" value=Upload>
                     </form>
 
                     <script>
@@ -70,4 +74,3 @@
 </body>
 
 </html>
-{% endblock %}

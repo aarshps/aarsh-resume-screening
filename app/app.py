@@ -17,7 +17,6 @@ ALLOWED_EXTENSIONS = {'pdf'}
 app = Flask(__name__)
 mail = Mail(app)
 
-# configuration of mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'aathiraprcse2019@thejusengg.com'
@@ -30,10 +29,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.add_url_rule(
     "/uploads/<name>", endpoint="download_file", build_only=True
 )
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
-app.config['SECRET_KEY'] = 'super secret key'
-messages = [{'title': '',
-             'content': ''}]
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -44,76 +40,37 @@ def extract_email(email_content):
     email_pattern_compile = re.compile(pattern)
     email_extracted_result = email_pattern_compile.search(email_content)
     email_extracted = email_extracted_result.group()
-
-    print(email_extracted_result)
-
     return email_extracted
 
 @app.route('/')
 def hello_world():
-    return render_template("login.html")
-database={'aathira':'123','abhirami':'ari','amal':'amallu','jewelna':'jo'}
-
-@app.route('/form_login',methods=['POST','GET'])
-def login():
-    name1=request.form['username']
-    pwd=request.form['password']
-    if name1 not in database:
-	    return render_template('login.html',info='Invalid User')
-    else:
-        if database[name1]!=pwd:
-            return render_template('login.html',info='Invalid Password', username=name1)
-        else:
-	         return render_template('index.html',name=name1)
-        
-@app.route('/index')     
-def index():
-    return render_template('base.html', messages=messages)
-
-@app.route('/create/', methods=('GET', 'POST'))
-def create():
-    if request.method == 'POST':
-        title = request.form['title']
-        content = request.form['content']
-        if not title:
-            flash('Title is required!')
-        elif not content:
-            flash('Content is required!')
-        else:
-            messages.append({'title': title, 'content': content})
-            return redirect(url_for('index'))
-
-    return render_template('create.html')
+    return render_template("home.html")
 
 @app.route('/file', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
+    
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('screening', name=filename)+"#hasil")
-    return render_template("inn.html")
+            return redirect(url_for('screening', name=filename))
+    return render_template("screening.html")
 
 @app.route('/screening/<name>', methods=['GET', 'POST'])
 def screening(name):
     if request.method == 'POST':
-        # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
+
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
@@ -132,15 +89,18 @@ def screening(name):
                 count += 1
                 text += pageObj.extract_text()
 
+                extracted_email = extract_email(text)
+                print(extracted_email)
+
             def cleanResume(resumeText):
-                resumeText = re.sub('http\S+\s*', ' ', resumeText)  # remove URLs
-                resumeText = re.sub('RT|cc', ' ', resumeText)  # remove RT and cc
-                resumeText = re.sub('#\S+', '', resumeText)  # remove hashtags
-                resumeText = re.sub('@\S+', '  ', resumeText)  # remove mentions
+                resumeText = re.sub('http\S+\s*', ' ', resumeText)
+                resumeText = re.sub('RT|cc', ' ', resumeText)
+                resumeText = re.sub('#\S+', '', resumeText) 
+                resumeText = re.sub('@\S+', '  ', resumeText)
                 resumeText = re.sub('[%s]' % re.escape("""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""), ' ',
-                                    resumeText)  # remove punctuations
+                                    resumeText)
                 resumeText = re.sub(r'[^\x00-\x7f]', r' ', resumeText)
-                resumeText = re.sub('\s+', ' ', resumeText)  # remove extra whitespace
+                resumeText = re.sub('\s+', ' ', resumeText)
                 return resumeText.lower()
 
             text = cleanResume(text)
@@ -188,10 +148,8 @@ def screening(name):
             data_list = []
             devops_list = []
 
-            # Create an empty list where the scores will be stored
             scores = []
 
-            # Obtain the scores for each area
             for area in bidang.keys():
                 if area == 'Project Management':
                     for word_project in bidang['Project Management']:
@@ -199,6 +157,7 @@ def screening(name):
                             project += 1
                             project_list.append(word_project)
                     scores.append(project)
+
                 elif area == 'Backend':
                     for word_backend in bidang['Backend']:
                         if word_backend in text:
@@ -229,7 +188,6 @@ def screening(name):
 
             data_all_list = {'Project Management': project_list, 'Backend': backend_list, 'Frontend': frontend_list,
                              'Data Science': data_list, 'DevOps': devops_list}
-            # data_all_list_df = pd.DataFrame.from_dict(data_all_list, orient='index', dtype=object).transpose()
 
             summary = pd.DataFrame(scores, index=bidang.keys(), columns=['score']).sort_values(by='score', ascending=False).loc[
                 lambda df: df['score'] > 0]
@@ -244,7 +202,7 @@ def screening(name):
 
         if summary['score']['Project Management'] > 1:
             subject="Congratulations!"
-            msg = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=["aadhirapr@gmail.com"])
+            msg = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=[extracted_email])
             msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
             mail.send(msg)
 
@@ -260,14 +218,14 @@ def screening(name):
             text += pageObj.extract_text()
 
         def cleanResume(resumeText):
-            resumeText = re.sub('http\S+\s*', ' ', resumeText)  # remove URLs
-            resumeText = re.sub('RT|cc', ' ', resumeText)  # remove RT and cc
-            resumeText = re.sub('#\S+', '', resumeText)  # remove hashtags
-            resumeText = re.sub('@\S+', '  ', resumeText)  # remove mentions
+            resumeText = re.sub('http\S+\s*', ' ', resumeText)
+            resumeText = re.sub('RT|cc', ' ', resumeText) 
+            resumeText = re.sub('#\S+', '', resumeText) 
+            resumeText = re.sub('@\S+', '  ', resumeText)
             resumeText = re.sub('[%s]' % re.escape("""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""), ' ',
-                                resumeText)  # remove punctuations
+                                resumeText)
             resumeText = re.sub(r'[^\x00-\x7f]', r' ', resumeText)
-            resumeText = re.sub('\s+', ' ', resumeText)  # remove extra whitespace
+            resumeText = re.sub('\s+', ' ', resumeText) 
             return resumeText.lower()
         
         extracted_email = extract_email(text)
@@ -316,10 +274,8 @@ def screening(name):
         data_list = []
         devops_list = []
 
-        # Create an empty list where the scores will be stored
         scores = []
 
-        # Obtain the scores for each area
         for area in bidang.keys():
             if area == 'Project Management':
                 for word_project in bidang['Project Management']:
@@ -327,6 +283,7 @@ def screening(name):
                         project += 1
                         project_list.append(word_project)
                 scores.append(project)
+
             elif area == 'Backend':
                 for word_backend in bidang['Backend']:
                     if word_backend in text:
@@ -357,7 +314,6 @@ def screening(name):
 
         data_all_list = {'Project Management': project_list, 'Backend': backend_list, 'Frontend': frontend_list,
                          'Data Science': data_list, 'DevOps': devops_list}
-        #data_all_list_df = pd.DataFrame.from_dict(data_all_list, orient='index', dtype=object).transpose()
 
         summary = pd.DataFrame(scores, index=bidang.keys(), columns=['score']).sort_values(by='score', ascending=False).loc[
             lambda df: df['score'] > 0]
@@ -370,31 +326,14 @@ def screening(name):
         ax.figure.savefig(buf, format="png")
         data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
-        if summary['score']['Project Management'] > 1:
+        if summary['score']['Project Management'] > 0:
             subject="Congratulations!"
             msg = Message(subject, sender="aathiraprcse2019@thejusengg.com", recipients=[extracted_email])
             msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
             mail.send(msg)
         
 
-    return render_template('inn.html', data=data)
+    return render_template('screening.html', data=data)
 
-@app.route('/mail')
-def mail_home():
-    return render_template("form.html")
-
-
-@app.route('/send_message', methods=['POST','GET'])
-def send_mail():
-    if request.method == "POST":
-        email = request.form['email']
-        subject = request.form['subject']
-
-        msg = Message(subject , sender="aathiraprcse2019@thejusengg.com", recipients=[email])
-        msg.body = "Hi, \n\t Heres you technical test link below: \n https://forms.gle/HBoYroSjY2CT84o26 "
-        mail.send(msg)
-        success = "Message sent"
-        return render_template("result.html", success=success)
-    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=False)
