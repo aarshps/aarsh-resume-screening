@@ -31,6 +31,8 @@ app.add_url_rule(
 )
 
 
+database={'aathira':'123','abhirami':'ari','amal':'amallu','jewelna':'jo'}
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -40,11 +42,50 @@ def extract_email(email_content):
     email_pattern_compile = re.compile(pattern)
     email_extracted_result = email_pattern_compile.search(email_content)
     email_extracted = email_extracted_result.group()
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin
     return email_extracted
 
 @app.route('/')
 def hello_world():
+<<<<<<< HEAD
     return render_template("home.html")
+=======
+    return render_template("login.html")
+
+@app.route('/form_login',methods=['POST','GET'])
+def login():
+    name1=request.form['username']
+    pwd=request.form['password']
+    if name1 not in database:
+	    return render_template('login.html',info='Invalid User')
+    else:
+        if database[name1]!=pwd:
+            return render_template('login.html',info='Invalid Password', username=name1)
+        else:
+	         return render_template('index.html',name=name1)
+        
+@app.route('/index')     
+def index():
+    return render_template('base.html', messages=messages)
+
+@app.route('/create/', methods=('GET', 'POST'))
+def create():
+    if request.method == 'POST':
+        title = request.form['title']
+        content = request.form['content']
+        if not title:
+            flash('Title is required!')
+        elif not content:
+            flash('Content is required!')
+        else:
+            messages.append({'title': title, 'content': content})
+            return redirect(url_for('index'))
+
+    return render_template('create.html')
+>>>>>>> origin
 
 @app.route('/file', methods=['GET', 'POST'])
 def upload_file():

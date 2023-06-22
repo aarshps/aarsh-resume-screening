@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .message {
+            padding: 10px;
+            margin: 5px;
+            background-color: #f3f3f3
+        }
+        nav a {
+            color: #d64161;
+            font-size: 3em;
+            margin-left: 50px;
+            text-decoration: none;
+        }
+        .alert {
+            padding: 20px;
+            margin: 5px;
+            color: #970020;
+            background-color: #ffd5de;
+        }
+
+    </style>
+</head>
+<body  bgcolor="teal">
+    <br>
+    <h1 align="center">Welcome {{name}} !</h1>
+    <br>
+    <button type="button" onclick="window.location.href='{{ url_for( 'index') }}';">
+        Home</button>
+    <button type="button" onclick="window.location.href='{{ url_for( 'create') }}';">
+        About You</button>
+    <button type="button" onclick="window.location.href='{{ url_for( 'upload_file') }}';">
+        Upload Resume</button>
+    <div class="content">
+        {% for message in get_flashed_messages() %}
+            <div class="alert">{{ message }}</div>
+        {% endfor %}
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>
